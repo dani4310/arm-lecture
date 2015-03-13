@@ -24,7 +24,7 @@ fibonacci:
 	mov r6,r0
 
 	subs r4,r4,#1
-	bne .ITER@檢查z flag=0
+	bne .ITER@check z flag=0
 	pop {r3, r4, r5, r6, pc}		@EPILOG
 
 	@ END CODE MODIFICATION
