@@ -19,9 +19,9 @@ fibonacci:
 	cmp r4,#1 ;@ Compare R4 wtih 1
 	beq .L4;@ If R4 == 1 goto .L4 (which returns 1)
 	
-	mov.w r5,#0
-	mov.w r6,#0
-	mov.w r0,#1
+	ldr r5,=0
+	ldr r6,=0
+	ldr r0,=1
 	sub r4,r4,#1
 	
 .ITER:	
