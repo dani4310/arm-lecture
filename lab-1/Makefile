@@ -3,7 +3,6 @@ CFLAGS	= -O1 -Wall
 LDFLAGS = -fno-stack-protector
 
 objects	= fibseq.o fib.o
-
 default: fibseq
 
 .PHONY: default clean qemu
@@ -24,58 +23,20 @@ clean:
 	rm -f $(objects) fibseq
 
 QEMU_CMD = qemu-arm -L /usr/arm-linux-gnueabihf ./fibseq &
-CMD = yes 9 | $(call QEMU_CMD) && sleep 1
+CMD = yes $$number | $(call QEMU_CMD) sleep .2
 qemu: fibseq
-	@yes 5 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 6 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 7 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 8 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 9 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 10 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 11 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 12 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 13 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 14 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 15 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 16 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 17 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 18 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 19 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 20 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 21 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 22 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 23 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 24 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 25 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 26 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 27 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 28 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 29 | $(call QEMU_CMD)
-	@sleep .1
-	@yes 30 | $(call QEMU_CMD)
-	@sleep 1
+	@for number in $(shell seq 5 30) ; do \
+        $(call CMD) ; \
+    	done
+	
+
+
+
+#	for j in 1 2 3 4;do\ 
+#	CMD;\
+#	sleep .1;\
+#	done
+#	@yes 6 | $(call QEMU_CMD)
+#	@sleep .1
+#	@sleep 1
 
