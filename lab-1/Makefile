@@ -28,7 +28,7 @@ qemu: fibseq
 	@for number in $(shell seq 5 30) ; do \
         $(call CMD) ; \
     	done
-	
+	@sleep 1
 
 
 
