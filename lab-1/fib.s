@@ -14,10 +14,15 @@ fibonacci:
 	push {r3, r4, r5, lr}
 
 	subs r4,r0,#0; @ R4 = R0 - 0 (update flags)
-	ble .L3 ;@ if(R0 <= 0) goto .L3 (which returns 0)(ble判斷Z 為1 或﹙N和V不相等﹚
+	itt le ;@ if(R0 <= 0) 
+	movle r0,#0
+	pople {r3,r4,r5,pc}
+
 
 	cmp r4,#1; @ Compare R4 wtih 1
-	beq .L4;@ If R4 == 1 goto .L4 (which returns 1)(beq判斷Z為1
+	itt eq;@ If R4 == 1 
+	moveq r0, #1
+	popeq {r3,r4,r5,pc}
 
 	sub r0,r4,#1; @ R0 = R4 - 1
 	bl fibonacci ;@ Recursive call to fibonacci with R4 - 1 as parameter
@@ -31,13 +36,13 @@ fibonacci:
 	pop {r3, r4, r5, pc}		@EPILOG
 
 	@ END CODE MODIFICATION
-.L3:
-	mov r0, #0			@ R0 = 0
-	pop {r3, r4, r5, pc}		@ EPILOG
-
-.L4:
-	mov r0, #1			@ R0 = 1
-	pop {r3, r4, r5, pc}		@ EPILOG
+@.L3:
+@	mov r0, #0			@ R0 = 0
+@	pop {r3, r4, r5, pc}		@ EPILOG
+@
+@.L4:
+@	mov r0, #1			@ R0 = 1
+@	pop {r3, r4, r5, pc}		@ EPILOG
 
 	.size fibonacci, .-fibonacci
 	.end
